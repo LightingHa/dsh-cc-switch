@@ -1,0 +1,8 @@
+# 统一行尾：仓库里存 LF，检出也用 LF，避免 Windows/macOS/Linux 之间来回转换。
+# 插件源码、补丁 YAML、测试都按文本处理；二进制文件交给 git 自动判断。
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.tgz binary

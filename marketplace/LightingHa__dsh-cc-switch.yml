@@ -1,0 +1,20 @@
+# 提交到 DSH 插件市场（awesome-dsh-plugin）用的条目文件。
+#
+# 用法：把本文件原样复制到 awesome-dsh-plugin 仓库的
+#       data/plugins/LightingHa__dsh-cc-switch.yml，然后提 PR。
+#       收录后 https://awesome-dsh-plugin.com 与 dshmarket 插件市场会自动显示，
+#       两个 README 由 CI 生成，不要手工编辑。
+#
+# 规则提醒（来自该仓库的 contributing.md）：
+#   · 一个插件一个文件，文件名 = <owner>__<repo>.yml；
+#   · url 必须与仓库完全一致；name 是列表中显示的链接文字；
+#   · 只有 description.en 必填（zh 可选，维护者会补）；
+#   · 描述里出现 ": "（冒号加空格）必须加引号，否则 YAML 会解析失败；
+#   · 不要手写 npm: 字段 —— 映射由 registry 自动采集，手写会被校验拒绝；
+#   · 仓库需公开声明 dsh.bundle manifest 并带 cordis.patch.yml（本项目已满足）。
+url: https://github.com/LightingHa/dsh-cc-switch
+name: LightingHa/dsh-cc-switch
+category: model
+description:
+  en: "Brings the providers you already configured in cc-switch into DeepSeek Harness: reads the cc-switch database, converts Claude / Codex / OpenClaw / MCode / Pi entries into llm-pi-ai routes with their API keys, and adds a health check that measures time-to-first-byte and whether each stream completes."
+  zh: "把 cc-switch 里配好的模型供应商接进 DeepSeek Harness：读取 cc-switch 数据库，将 Claude / Codex / OpenClaw / MCode / Pi 等条目转成 llm-pi-ai 路由并写入 API Key，还提供实测首字节耗时与流能否正常收尾的体检。"

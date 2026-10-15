@@ -1,0 +1,99 @@
+{
+  "name": "dsh-cc-switch",
+  "version": "1.0.0",
+  "description": "把 cc-switch 里配好的模型供应商直接接入 DeepSeek Harness：读取 cc-switch 数据库，转换成 llm-pi-ai 路由并写入凭据，还能实测每条端点通不通。Bridges your cc-switch providers into DeepSeek Harness as llm-pi-ai routes.",
+  "type": "module",
+  "main": "./dsh/index.js",
+  "exports": {
+    ".": "./dsh/index.js",
+    "./dsh": "./dsh/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dsh",
+    "scripts",
+    "cordis.patch.yml",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek",
+    "deepseek-harness",
+    "plugin",
+    "cc-switch",
+    "ccswitch",
+    "model",
+    "provider",
+    "llm",
+    "pi-ai",
+    "model-router",
+    "openai-compatible",
+    "anthropic",
+    "codex"
+  ],
+  "license": "MIT",
+  "author": "LightingHa",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LightingHa/dsh-cc-switch.git"
+  },
+  "homepage": "https://github.com/LightingHa/dsh-cc-switch#readme",
+  "bugs": {
+    "url": "https://github.com/LightingHa/dsh-cc-switch/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22.13",
+    "dsh": ">=0.2.0-rc.1"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "devDependencies": {
+    "js-yaml": "^5.4.3"
+  },
+  "scripts": {
+    "test": "node --test test/unit.test.mjs test/host.test.mjs test/manifest.test.mjs",
+    "test:unit": "node --test test/unit.test.mjs",
+    "test:host": "node --test test/host.test.mjs",
+    "test:manifest": "node --test test/manifest.test.mjs",
+    "inspect": "node scripts/inspect.mjs",
+    "probe": "node scripts/probe.mjs",
+    "prepublishOnly": "npm test"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "catalog": {
+      "category": "model",
+      "summary": {
+        "en": "Import your cc-switch providers into DeepSeek Harness as llm-pi-ai routes, with API keys stored as credentials and a health check that measures each endpoint.",
+        "zh": "把 cc-switch 里的模型供应商接进 DeepSeek Harness：自动转成 llm-pi-ai 路由、写入 API Key，并能实测每条端点通不通、快不快。"
+      },
+      "capabilities": [
+        {
+          "en": "Reads ~/.cc-switch/cc-switch.db (SQLite, plus the legacy config.json) and converts Claude / Codex / OpenClaw / MCode / Pi entries into llm-pi-ai provider routes.",
+          "zh": "读取 ~/.cc-switch/cc-switch.db（SQLite，也认旧版 config.json），把 Claude / Codex / OpenClaw / MCode / Pi 等条目转成 llm-pi-ai 路由。"
+        },
+        {
+          "en": "Stores each provider's API key through the harness credential service and writes routes through the settings service, so they appear in the Models page without a restart.",
+          "zh": "通过 harness 凭据服务存 API Key，通过 settings 服务写路由，「设置 → 模型」里立刻可见，无需重启。"
+        },
+        {
+          "en": "Adds a cc_switch tool with status / sync / plan / probe / list / skip-list actions; probe measures time-to-first-byte and whether the stream completes.",
+          "zh": "注册 cc_switch 工具，支持 status / sync / plan / probe / list / skip-list；probe 实测首字节耗时与流是否正常收尾。"
+        },
+        {
+          "en": "Only ever touches routes it owns (ccswitch- prefix plus a state manifest); official OAuth providers and Gemini-native endpoints are skipped with an explicit reason.",
+          "zh": "只动自己拥有的路由（ccswitch- 前缀 + 清单文件）；官方 OAuth 供应商与 Gemini 原生端点会被跳过并说明原因。"
+        }
+      ]
+    }
+  }
+}

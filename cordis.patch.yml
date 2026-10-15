@@ -1,0 +1,6 @@
+# dsh bundle 层：把本插件挂进 profile。
+# 只要本包被列进 profile 的 package.json -> dsh.profile.bundles，
+# DSH 启动时就会自动加载下面这个条目。
+- insert:
+    - id: cc-switch
+      name: 'dsh-cc-switch'
